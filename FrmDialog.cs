@@ -47,35 +47,46 @@ namespace ShuffleApplication
             }                                   
         }       
         private void CmdNext_Click(object sender, EventArgs e)
-        {            
-            TvwTables.Nodes.Clear();
-            Connection = new SqlConnection(TxtConnectionString.Text);
-            Connection.Open();
-            SqlCommand cmd = new SqlCommand("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE' ORDER BY table_name", Connection);
-            TvwTables.CheckBoxes = true;
-            SqlConnectionStringBuilder builder=new SqlConnectionStringBuilder(TxtConnectionString.Text);
-            TreeNode nodeDatabase = new TreeNode(builder.InitialCatalog);
-            nodeDatabase.Name = "Database";
-            nodeDatabase.Checked = true;            
-            TreeNode nodeTables = new TreeNode("Tablas");
-            nodeTables.Name = "Tables";
-            nodeTables.Checked = true;
-            nodeDatabase.Nodes.Add(nodeTables);                
-            TvwTables.Nodes.Add(nodeDatabase);
-            using (SqlDataReader reader = cmd.ExecuteReader())
+        {
+            try
             {
-                while (reader.Read())
-                {                       
-                    TreeNode nodeColumns = new TreeNode("Columnas");
-                    nodeColumns.Name = "Columns";
-                    TreeNode nodeTable = new TreeNode(reader.GetString(0));
-                    nodeTable.Name = "Table";
-                    nodeTable.Nodes.Add(nodeColumns);
-                    nodeTables.Nodes.Add(nodeTable);                        
-                }
-            }            
-            tabControl1.SelectedTab = tabPage2;
-            nodeTables.Expand();
+                if (tabControl1.SelectedTab == tabPage1)
+                {
+                    TvwTables.Nodes.Clear();
+                    Connection = new SqlConnection(TxtConnectionString.Text);
+                    Connection.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE' ORDER BY table_name", Connection);
+                    TvwTables.CheckBoxes = true;
+                    SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(TxtConnectionString.Text);
+                    TreeNode nodeDatabase = new TreeNode(builder.InitialCatalog);
+                    nodeDatabase.Name = "Database";
+                    nodeDatabase.Checked = true;
+                    TreeNode nodeTables = new TreeNode("Tablas");
+                    nodeTables.Name = "Tables";
+                    nodeTables.Checked = true;
+                    nodeDatabase.Nodes.Add(nodeTables);
+                    TvwTables.Nodes.Add(nodeDatabase);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            TreeNode nodeColumns = new TreeNode("Columnas");
+                            nodeColumns.Name = "Columns";
+                            TreeNode nodeTable = new TreeNode(reader.GetString(0));
+                            nodeTable.Name = "Table";
+                            nodeTable.Nodes.Add(nodeColumns);
+                            nodeTables.Nodes.Add(nodeTable);
+                        }
+                    }
+                    tabControl1.SelectedTab = tabPage2;
+                    nodeDatabase.Expand();
+                    nodeTables.Expand();
+                }            
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void TvwTables_AfterCheck(object sender, TreeViewEventArgs e)
@@ -120,6 +131,39 @@ namespace ShuffleApplication
         private void CmdExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void CmdPrevious_Click(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab == tabPage2)
+            {
+                tabControl1.SelectedTab = tabPage1;
+            }
+
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab == tabPage1)
+            {
+                CmdNext.Enabled = true;
+                CmdPrevious.Enabled = false;
+            }
+            else if (tabControl1.SelectedTab == tabPage2)
+            {
+                CmdNext.Enabled = true;
+                CmdPrevious.Enabled = true;
+            }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
         }      
     }
 }

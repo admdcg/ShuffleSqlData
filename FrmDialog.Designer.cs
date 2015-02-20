@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Tablas");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Tablas");
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
@@ -50,14 +50,16 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Location = new System.Drawing.Point(0, 39);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(876, 430);
+            this.tabControl1.Size = new System.Drawing.Size(876, 452);
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -66,19 +68,20 @@
             this.tabPage1.Controls.Add(this.TxtConnectionString);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(868, 404);
+            this.tabPage1.Size = new System.Drawing.Size(868, 426);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Connection string";
             this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(57, 87);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(106, 13);
+            this.label1.Size = new System.Drawing.Size(91, 13);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Cadena de Conexión";
+            this.label1.Text = "Connection String";
             // 
             // CmdOpenDialog
             // 
@@ -116,10 +119,10 @@
             this.TvwTables.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TvwTables.Location = new System.Drawing.Point(3, 3);
             this.TvwTables.Name = "TvwTables";
-            treeNode1.Name = "Tables";
-            treeNode1.Text = "Tablas";
+            treeNode10.Name = "Tables";
+            treeNode10.Text = "Tablas";
             this.TvwTables.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1});
+            treeNode10});
             this.TvwTables.Size = new System.Drawing.Size(862, 398);
             this.TvwTables.TabIndex = 0;
             this.TvwTables.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.TvwTables_AfterCheck);
@@ -130,37 +133,39 @@
             this.panel1.Controls.Add(this.CmdExit);
             this.panel1.Controls.Add(this.CmdNext);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 430);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(876, 71);
+            this.panel1.Size = new System.Drawing.Size(876, 61);
             this.panel1.TabIndex = 1;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // CmdPrevious
             // 
-            this.CmdPrevious.Location = new System.Drawing.Point(582, 24);
+            this.CmdPrevious.Location = new System.Drawing.Point(580, 22);
             this.CmdPrevious.Name = "CmdPrevious";
             this.CmdPrevious.Size = new System.Drawing.Size(75, 23);
             this.CmdPrevious.TabIndex = 8;
-            this.CmdPrevious.Text = "<- Anteri&or";
+            this.CmdPrevious.Text = "<- &Previous";
             this.CmdPrevious.UseVisualStyleBackColor = true;
+            this.CmdPrevious.Click += new System.EventHandler(this.CmdPrevious_Click);
             // 
             // CmdExit
             // 
-            this.CmdExit.Location = new System.Drawing.Point(663, 24);
+            this.CmdExit.Location = new System.Drawing.Point(661, 22);
             this.CmdExit.Name = "CmdExit";
             this.CmdExit.Size = new System.Drawing.Size(75, 23);
             this.CmdExit.TabIndex = 7;
-            this.CmdExit.Text = "Salir";
+            this.CmdExit.Text = "E&xit";
             this.CmdExit.UseVisualStyleBackColor = true;
             this.CmdExit.Click += new System.EventHandler(this.CmdExit_Click);
             // 
             // CmdNext
             // 
-            this.CmdNext.Location = new System.Drawing.Point(744, 24);
+            this.CmdNext.Location = new System.Drawing.Point(742, 22);
             this.CmdNext.Name = "CmdNext";
             this.CmdNext.Size = new System.Drawing.Size(75, 23);
             this.CmdNext.TabIndex = 6;
-            this.CmdNext.Text = "Siguie&nte ->";
+            this.CmdNext.Text = "&Next ->";
             this.CmdNext.UseVisualStyleBackColor = true;
             this.CmdNext.Click += new System.EventHandler(this.CmdNext_Click);
             // 
@@ -178,7 +183,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabControl1);
             this.Name = "FrmDialog";
-            this.Text = "Form1";
+            this.Text = "Shuffle Rows From SQL Server";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
