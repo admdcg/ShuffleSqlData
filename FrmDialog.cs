@@ -97,72 +97,86 @@ namespace ShuffleApplication
         {            
             TreeNode nodeTables = TvwTables.Nodes[0].Nodes["Tables"];
             foreach (TreeNode nodeTable in nodeTables.Nodes)
-            {                
-                TreeNode nodeColumns = nodeTable.Nodes["Columns"];
-                string strColIns = "";
-                string strColUpd = "";
-                string strColWhe = "";
-                
-                Dictionary<string,string> dicCol = new Dictionary<string,string>();
-                foreach(TreeNode nodeColumn in nodeColumns.Nodes)
-                {                       
-                    bool isPrimary = (nodeColumns.Tag !=null && nodeColumn.Tag.ToString() == "PK") ? true: false; 
-                        
-                    if (isPrimary || nodeColumn.Checked)
-                    {
-                        if (strColIns != "")
-                        {
-                            strColIns += ",\r\n";
-                        }
-                        strColIns = "[" + nodeColumn.Text + "] , [" + nodeColumn.Text + "] AS [" + nodeColumn.Text + "_shuffle_new],\r\n" +
-                                "ROW_NUMBER() OVER (ORDER BY NEWID()) AS [" + nodeColumn.Text + "_shuffle_order]";
-
-                        string strUpd = "UPDATE s2\r\n" +
-                            "SET [" + nodeColumn.Text + "_shuffle_new] = s1.[" + nodeColumn.Text + "]\r\n" +
-                            "FROM #Shuffle s1, #Shuffle s2\r\n" +
-                            "WHERE s1.[Shuffle_OriginalOrder] = s2.[" + nodeColumn.Text + "_shuffle_order]\r\n";
-                        dicCol.Add (nodeTable.Text , strUpd);
-                        if (!isPrimary) // No update PK Columns
-                        {
-                            if (strColUpd != "")
-                            {
-                                strColUpd += ",\r\n";
-                            }
-                            strColUpd += "[" + nodeColumn.Text + "] = " + "s1.[" + nodeColumn.Text + "_shuffle_new]";                            
-                        }
-                        else
-                        {
-                            if (strColWhe != "")
-                            {
-                                strColWhe += " AND ";
-                            }
-                            strColWhe = "s1.[" + nodeColumn.Text + "]=[ " + nodeTable.Text +"].[" + nodeColumn.Text + "]";                                
-                        }       
-                    }                    
-                }
-                //Insert to Temp Table
-                string strSql = "IF OBJECT_ID('tempdb..#Shuffle') IS NOT NULL\r\n" +
-                            "BEGIN\r\n" +
-                            "  DROP TABLE #Shuffle\r\n" +
-                            "END\r\n" +
-                            "\r\n" +
-                            "SELECT IDENTITY(INT,1,1) AS [Shuffle_OriginalOrder],\r\n";                     
-	
-                strSql += strColIns + "INTO #Shuffle\r\n" +
-                                   "FROM [" + nodeTable.Text + "]\r\n";
-                //Update on temp table for every column
-                foreach (string upd in dicCol.Values)
+            {             
+                if (nodeTable.Checked)
                 {
-                    strSql += upd + "\r\n";
-                }                
-                //Update on original table from PrimaryKey
-                strSql += "UPDATE [" + nodeTable.Text + "]\r\n" +
-	                      "SET\r\n" +  strColUpd +
-                          "FROM [" + nodeTable.Text + "], #Shuffle s1\r\n" +
-	                      "WHERE\r\n" + strColWhe;
+                    TreeNode nodeColumns = nodeTable.Nodes["Columns"];
+                    string strColIns = "";
+                    string strColUpd = "";
+                    string strColWhe = "";
+                    Dictionary<string, string> dicColUpd = new Dictionary<string, string>();
+                    foreach(TreeNode nodeColumn in nodeColumns.Nodes)
+                    {                       
+                        bool isPrimary = (nodeColumn.Tag !=null && nodeColumn.Tag.ToString() == "PK") ? true: false; 
+                        
+                        if (isPrimary || nodeColumn.Checked)
+                        {
+                            if (strColIns != "")
+                            {
+                                strColIns += ",\r\n";
+                            }
+                            strColIns += "[" + nodeColumn.Text + "] , [" + nodeColumn.Text + "] AS [" + nodeColumn.Text + "_shuffle_new],\r\n" +
+                                    "ROW_NUMBER() OVER (ORDER BY NEWID()) AS [" + nodeColumn.Text + "_shuffle_order]";
 
-                TxtScript.Text += strSql;
-            }                
+                            string strUpd = "UPDATE s2\r\n" +
+                                "SET [" + nodeColumn.Text + "_shuffle_new] = s1.[" + nodeColumn.Text + "]\r\n" +
+                                "FROM #Shuffle s1, #Shuffle s2\r\n" +
+                                "WHERE s1.[Shuffle_OriginalOrder] = s2.[" + nodeColumn.Text + "_shuffle_order]\r\n";
+                            dicColUpd.Add (nodeColumn.Text , strUpd);
+                            if (!isPrimary) // No update PK Columns
+                            {
+                                if (strColUpd != "")
+                                {
+                                    strColUpd += ",\r\n";
+                                }
+                                strColUpd += "[" + nodeColumn.Text + "] = " + "s1.[" + nodeColumn.Text + "_shuffle_new]";                            
+                            }
+                            else // Mount Where with PK
+                            {
+                                if (strColWhe != "")
+                                {
+                                    strColWhe += " AND ";
+                                }
+                                strColWhe = "s1.[" + nodeColumn.Text + "] = [" + nodeTable.Text +"].[" + nodeColumn.Text + "]";                                
+                            }       
+                        }                    
+                    }
+                    // Drop Temp Table if exist
+                    string strSql = "/* Drop Temp Table if exist*/\r\n" +
+                                "IF OBJECT_ID('tempdb..#Shuffle') IS NOT NULL\r\n" +
+                                "BEGIN\r\n" +
+                                "  DROP TABLE #Shuffle\r\n" +
+                                "END\r\n" +
+                                "\r\n";
+
+                   // Insert to Temp Table
+                   strSql += "/* Insert to Temp Table */\r\n" +                                            
+                                "SELECT IDENTITY(INT,1,1) AS [Shuffle_OriginalOrder],\r\n" +                     	
+                                strColIns + "\r\n" +
+                                "INTO #Shuffle \r\n" +
+                                "FROM [" + nodeTable.Text + "]\r\n\r\n";
+
+                    //Update(s) on temp table for every columns
+                    strSql += "/* Update on temp table for every column */\r\n";                    
+                    foreach (string upd in dicColUpd.Values)
+                    {
+                        strSql += upd + "\r\n";
+                    }
+
+                    //Update on original table from Temp Table with PrimaryKey
+                    strSql += "\r\n/* Update on original table from Temp Table with PrimaryKey */\r\n";                                            
+                    strSql += "UPDATE [" + nodeTable.Text + "]\r\n" +
+	                          "SET\r\n" +  strColUpd + "\r\n" +
+                              "FROM [" + nodeTable.Text + "], #Shuffle s1\r\n" +
+	                          "WHERE " + strColWhe + "\r\n\r\n";
+
+                    // Drop Temp table
+                    strSql += "\r\n/* Drop Temp Table */\r\n";                                            
+                    strSql += "DROP TABLE #Shuffle\r\n\r\n";                    
+
+                    TxtScript.Text += strSql.ToString();
+                }                
+            }
         }
 
         private void TvwTables_AfterCheck(object sender, TreeViewEventArgs e)
@@ -244,7 +258,10 @@ namespace ShuffleApplication
             {
                 tabControl1.SelectedTab = tabPage1;
             }
-
+            else if (tabControl1.SelectedTab == tabPage3)
+            {
+                tabControl1.SelectedTab = tabPage2;
+            }   
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)

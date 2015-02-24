@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Tablas");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Tablas");
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
@@ -123,10 +123,10 @@
             this.TvwTables.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TvwTables.Location = new System.Drawing.Point(3, 3);
             this.TvwTables.Name = "TvwTables";
-            treeNode1.Name = "Tables";
-            treeNode1.Text = "Tablas";
+            treeNode2.Name = "Tables";
+            treeNode2.Text = "Tablas";
             this.TvwTables.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1});
+            treeNode2});
             this.TvwTables.Size = new System.Drawing.Size(862, 420);
             this.TvwTables.TabIndex = 0;
             this.TvwTables.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.TvwTables_AfterCheck);
@@ -196,6 +196,7 @@
             this.TxtScript.Location = new System.Drawing.Point(3, 3);
             this.TxtScript.Multiline = true;
             this.TxtScript.Name = "TxtScript";
+            this.TxtScript.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.TxtScript.Size = new System.Drawing.Size(862, 420);
             this.TxtScript.TabIndex = 0;
             // 
