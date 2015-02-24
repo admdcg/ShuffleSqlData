@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Tablas");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Tablas");
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
@@ -42,10 +42,13 @@
             this.CmdExit = new System.Windows.Forms.Button();
             this.CmdNext = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.TxtScript = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -54,7 +57,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(0, 39);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Location = new System.Drawing.Point(0, 60);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(876, 452);
@@ -109,7 +113,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(868, 404);
+            this.tabPage2.Size = new System.Drawing.Size(868, 426);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Tablas";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -119,11 +123,11 @@
             this.TvwTables.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TvwTables.Location = new System.Drawing.Point(3, 3);
             this.TvwTables.Name = "TvwTables";
-            treeNode10.Name = "Tables";
-            treeNode10.Text = "Tablas";
+            treeNode1.Name = "Tables";
+            treeNode1.Text = "Tablas";
             this.TvwTables.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode10});
-            this.TvwTables.Size = new System.Drawing.Size(862, 398);
+            treeNode1});
+            this.TvwTables.Size = new System.Drawing.Size(862, 420);
             this.TvwTables.TabIndex = 0;
             this.TvwTables.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.TvwTables_AfterCheck);
             // 
@@ -175,11 +179,31 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.TxtScript);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(868, 426);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Script";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // TxtScript
+            // 
+            this.TxtScript.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TxtScript.Location = new System.Drawing.Point(3, 3);
+            this.TxtScript.Multiline = true;
+            this.TxtScript.Name = "TxtScript";
+            this.TxtScript.Size = new System.Drawing.Size(862, 420);
+            this.TxtScript.TabIndex = 0;
+            // 
             // FrmDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(876, 503);
+            this.ClientSize = new System.Drawing.Size(876, 524);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabControl1);
             this.Name = "FrmDialog";
@@ -189,6 +213,8 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -207,6 +233,8 @@
         private System.Windows.Forms.Button CmdNext;
         private System.Windows.Forms.TreeView TvwTables;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TextBox TxtScript;
     }
 }
 
