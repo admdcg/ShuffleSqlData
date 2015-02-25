@@ -241,6 +241,7 @@
             this.ClientSize = new System.Drawing.Size(876, 476);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmDialog";
             this.Text = "Shuffle Rows From SQL Server";
             this.Load += new System.EventHandler(this.FrmDialog_Load);
