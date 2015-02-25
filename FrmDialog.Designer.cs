@@ -29,7 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Tablas");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Tablas");
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmDialog));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
@@ -37,31 +38,36 @@
             this.TxtConnectionString = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.TvwTables = new System.Windows.Forms.TreeView();
+            this.imgList = new System.Windows.Forms.ImageList(this.components);
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.TxtScript = new System.Windows.Forms.TextBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.TxtResult = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.CmdPrevious = new System.Windows.Forms.Button();
             this.CmdExit = new System.Windows.Forms.Button();
             this.CmdNext = new System.Windows.Forms.Button();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.TxtScript = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(0, 60);
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(876, 452);
+            this.tabControl1.Size = new System.Drawing.Size(876, 472);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -72,11 +78,10 @@
             this.tabPage1.Controls.Add(this.TxtConnectionString);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(868, 426);
+            this.tabPage1.Size = new System.Drawing.Size(868, 446);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Connection string";
             this.tabPage1.UseVisualStyleBackColor = true;
-            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // label1
             // 
@@ -104,8 +109,6 @@
             this.TxtConnectionString.Name = "TxtConnectionString";
             this.TxtConnectionString.Size = new System.Drawing.Size(614, 113);
             this.TxtConnectionString.TabIndex = 0;
-            this.TxtConnectionString.Text = "Data Source=SRVSQL;Initial Catalog=ChequesXPIntraSoftTest;Persist Security Info=T" +
-    "rue;User ID=sa;Password=IntrasoftSA2027";
             // 
             // tabPage2
             // 
@@ -113,7 +116,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(868, 426);
+            this.tabPage2.Size = new System.Drawing.Size(868, 446);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Tablas";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -121,63 +124,28 @@
             // TvwTables
             // 
             this.TvwTables.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TvwTables.ImageIndex = 0;
+            this.TvwTables.ImageList = this.imgList;
             this.TvwTables.Location = new System.Drawing.Point(3, 3);
             this.TvwTables.Name = "TvwTables";
-            treeNode2.Name = "Tables";
-            treeNode2.Text = "Tablas";
+            treeNode1.Name = "Tables";
+            treeNode1.Text = "Tablas";
             this.TvwTables.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
-            this.TvwTables.Size = new System.Drawing.Size(862, 420);
+            treeNode1});
+            this.TvwTables.SelectedImageIndex = 0;
+            this.TvwTables.Size = new System.Drawing.Size(862, 440);
             this.TvwTables.TabIndex = 0;
             this.TvwTables.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.TvwTables_AfterCheck);
             // 
-            // panel1
+            // imgList
             // 
-            this.panel1.Controls.Add(this.CmdPrevious);
-            this.panel1.Controls.Add(this.CmdExit);
-            this.panel1.Controls.Add(this.CmdNext);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(876, 61);
-            this.panel1.TabIndex = 1;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            // 
-            // CmdPrevious
-            // 
-            this.CmdPrevious.Location = new System.Drawing.Point(580, 22);
-            this.CmdPrevious.Name = "CmdPrevious";
-            this.CmdPrevious.Size = new System.Drawing.Size(75, 23);
-            this.CmdPrevious.TabIndex = 8;
-            this.CmdPrevious.Text = "<- &Previous";
-            this.CmdPrevious.UseVisualStyleBackColor = true;
-            this.CmdPrevious.Click += new System.EventHandler(this.CmdPrevious_Click);
-            // 
-            // CmdExit
-            // 
-            this.CmdExit.Location = new System.Drawing.Point(661, 22);
-            this.CmdExit.Name = "CmdExit";
-            this.CmdExit.Size = new System.Drawing.Size(75, 23);
-            this.CmdExit.TabIndex = 7;
-            this.CmdExit.Text = "E&xit";
-            this.CmdExit.UseVisualStyleBackColor = true;
-            this.CmdExit.Click += new System.EventHandler(this.CmdExit_Click);
-            // 
-            // CmdNext
-            // 
-            this.CmdNext.Location = new System.Drawing.Point(742, 22);
-            this.CmdNext.Name = "CmdNext";
-            this.CmdNext.Size = new System.Drawing.Size(75, 23);
-            this.CmdNext.TabIndex = 6;
-            this.CmdNext.Text = "&Next ->";
-            this.CmdNext.UseVisualStyleBackColor = true;
-            this.CmdNext.Click += new System.EventHandler(this.CmdNext_Click);
-            // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imgList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgList.ImageStream")));
+            this.imgList.TransparentColor = System.Drawing.Color.Transparent;
+            this.imgList.Images.SetKeyName(0, "bbdd");
+            this.imgList.Images.SetKeyName(1, "column");
+            this.imgList.Images.SetKeyName(2, "primarykey");
+            this.imgList.Images.SetKeyName(3, "table");
+            this.imgList.Images.SetKeyName(4, "folder");
             // 
             // tabPage3
             // 
@@ -185,7 +153,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(868, 426);
+            this.tabPage3.Size = new System.Drawing.Size(868, 446);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Script";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -197,25 +165,94 @@
             this.TxtScript.Multiline = true;
             this.TxtScript.Name = "TxtScript";
             this.TxtScript.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TxtScript.Size = new System.Drawing.Size(862, 420);
+            this.TxtScript.Size = new System.Drawing.Size(862, 440);
             this.TxtScript.TabIndex = 0;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.TxtResult);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(868, 446);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Result";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // TxtResult
+            // 
+            this.TxtResult.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TxtResult.Location = new System.Drawing.Point(3, 3);
+            this.TxtResult.Multiline = true;
+            this.TxtResult.Name = "TxtResult";
+            this.TxtResult.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.TxtResult.Size = new System.Drawing.Size(862, 440);
+            this.TxtResult.TabIndex = 0;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.CmdPrevious);
+            this.panel1.Controls.Add(this.CmdExit);
+            this.panel1.Controls.Add(this.CmdNext);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 443);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(876, 33);
+            this.panel1.TabIndex = 1;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // CmdPrevious
+            // 
+            this.CmdPrevious.Dock = System.Windows.Forms.DockStyle.Right;
+            this.CmdPrevious.Location = new System.Drawing.Point(651, 0);
+            this.CmdPrevious.Name = "CmdPrevious";
+            this.CmdPrevious.Size = new System.Drawing.Size(75, 33);
+            this.CmdPrevious.TabIndex = 8;
+            this.CmdPrevious.Text = "<- &Previous";
+            this.CmdPrevious.UseVisualStyleBackColor = true;
+            this.CmdPrevious.Click += new System.EventHandler(this.CmdPrevious_Click);
+            // 
+            // CmdExit
+            // 
+            this.CmdExit.Dock = System.Windows.Forms.DockStyle.Right;
+            this.CmdExit.Location = new System.Drawing.Point(726, 0);
+            this.CmdExit.Name = "CmdExit";
+            this.CmdExit.Size = new System.Drawing.Size(75, 33);
+            this.CmdExit.TabIndex = 7;
+            this.CmdExit.Text = "E&xit";
+            this.CmdExit.UseVisualStyleBackColor = true;
+            this.CmdExit.Click += new System.EventHandler(this.CmdExit_Click);
+            // 
+            // CmdNext
+            // 
+            this.CmdNext.Dock = System.Windows.Forms.DockStyle.Right;
+            this.CmdNext.Location = new System.Drawing.Point(801, 0);
+            this.CmdNext.Name = "CmdNext";
+            this.CmdNext.Size = new System.Drawing.Size(75, 33);
+            this.CmdNext.TabIndex = 6;
+            this.CmdNext.Text = "&Next ->";
+            this.CmdNext.UseVisualStyleBackColor = true;
+            this.CmdNext.Click += new System.EventHandler(this.CmdNext_Click);
             // 
             // FrmDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(876, 524);
+            this.ClientSize = new System.Drawing.Size(876, 476);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabControl1);
             this.Name = "FrmDialog";
             this.Text = "Shuffle Rows From SQL Server";
+            this.Load += new System.EventHandler(this.FrmDialog_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -233,9 +270,11 @@
         private System.Windows.Forms.Button CmdExit;
         private System.Windows.Forms.Button CmdNext;
         private System.Windows.Forms.TreeView TvwTables;
-        private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TextBox TxtScript;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TextBox TxtResult;
+        private System.Windows.Forms.ImageList imgList;
     }
 }
 
