@@ -11,6 +11,8 @@ namespace ShuffleApplication
         private string[] _tables;        
         public string[] Tables
         {
+
+
             get
             {
                 return _tables;                    
