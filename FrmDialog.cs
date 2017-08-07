@@ -345,6 +345,9 @@ namespace ShuffleApplication
             TxtConnectionString.Text = (string)Properties.Settings.Default["ConnectionString"];
         }
 
-        
+        private void TxtConnectionString_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

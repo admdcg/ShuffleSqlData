@@ -109,6 +109,7 @@
             this.TxtConnectionString.Name = "TxtConnectionString";
             this.TxtConnectionString.Size = new System.Drawing.Size(614, 113);
             this.TxtConnectionString.TabIndex = 0;
+            this.TxtConnectionString.TextChanged += new System.EventHandler(this.TxtConnectionString_TextChanged);
             // 
             // tabPage2
             // 
