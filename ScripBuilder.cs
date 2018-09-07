@@ -11,7 +11,7 @@ namespace ShuffleApplication
         private string[] _tables;        
         public string[] Tables
         {
-                        get
+            get
             {
                 return _tables;                    
             }   
@@ -20,7 +20,5 @@ namespace ShuffleApplication
                 _tables = value;
             }
         }
-       
-
     }
 }
