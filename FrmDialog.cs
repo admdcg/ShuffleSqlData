@@ -117,10 +117,12 @@ namespace ShuffleApplication
             TxtResult.Text = String.Format("Execution completed.\r\nTotal Shuffle Rows Affected: {0}", rowsAffected);        
         }
         private void MountScript()
-        {            
+        {
+            TxtScript.Text = "";
             TreeNode nodeTables = TvwTables.Nodes[0].Nodes["Tables"];
             foreach (TreeNode nodeTable in nodeTables.Nodes)
-            {             
+            {
+                var tmpTable = "[#" + nodeTable.Text + "_shuffle]"; 
                 if (nodeTable.Checked)
                 {
                     TreeNode nodeColumns = nodeTable.Nodes["Columns"];
@@ -170,9 +172,9 @@ namespace ShuffleApplication
                     }
                     // Drop Temp Table if exist
                     string strSql = "/* Drop Temp Table if exist*/\r\n" +
-                                "IF OBJECT_ID('tempdb..[#" + nodeTable.Text + "_shuffle]') IS NOT NULL\r\n" +
+                                "IF OBJECT_ID('tempdb.." + tmpTable + "') IS NOT NULL\r\n" +
                                 "BEGIN\r\n" +
-                                "  DROP TABLE [#" + nodeTable.Text +"_shuffle]\r\n" +
+                                "  DROP TABLE " + tmpTable + "\r\n" +
                                 "END\r\n" +
                                 "\r\n";
 
